@@ -1,0 +1,157 @@
+{% extends 'base.html'%}
+{% block content %}
+
+  <div class="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!--page title-->
+            <div class="page-title mb-4 d-flex align-items-center">
+                <div class="mr-auto">
+                    <h4 class="weight500 d-inline-block pr-3 mr-3 border-right">Tables Categorie & Direction</h4>
+                    <nav aria-label="breadcrumb" class="d-inline-block ">
+                        <ol class="breadcrumb p-0">
+                             <li class="breadcrumb-item"><a href="{% url 'equip:home' %}">Accueil</a></li>
+                              <li class="breadcrumb-item"><a href="{% url 'equip:table_equipement' %}">TableEquipement</a></li>
+                               <li class="breadcrumb-item"><a href="{% url 'installation:table_installation' %}">TableInstallation</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">TableCategorie&Direction</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!--/page title-->
+                               {% if messages %}
+                                 {% for message in messages %}
+                                     <div class="alert alert-{{message.tags}}">
+                                        {{message}}
+                                     </div>
+                                 {% endfor %}
+                               {% endif %}
+
+            <div class="row">
+                <div class="col-xl-6 col-md-6">
+                    <div class="card card-shadow mb-4">
+
+
+                        <div class="card-header border-0">
+                            <div class="custom-title-wrap bar-primary">
+                                <div class="custom-title">Categorie D'equipement</div>
+                            </div>
+                        </div>
+
+
+                        <ul type="none" class="object-tools">
+
+                              <li>
+
+                                <a href="{% url 'equip:add_categorie' %}" title="Ajouter Categorie D'equipement" class="btn btn-primary p-1">
+                                    Add categorie  <big>+</big>
+                                </a>
+
+                              </li>
+
+
+
+                       </ul>
+
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nom</th>
+
+                                    <th scope="col">Action</th>
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for list in list_cat %}
+                                <tr>
+                                    <th scope="row">{{ list.id }}</th>
+                                    <td>{{ list.name}}</td>
+
+                                    <td>  <a class="text-dark btn btn-success p-2" href="{% url 'equip:update_categorie' list.id %}" title="Modifier categorie"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+
+
+                                </tr>
+
+
+
+                                {% endfor%}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+<!--                deuxieme table-->
+
+                <div class="col-xl-6 col-md-6">
+
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header border-0">
+                            <div class="custom-title-wrap bar-warning">
+                                <div class="custom-title">Direction</div>
+                            </div>
+                        </div>
+
+                        <ul type="none" class="object-tools">
+                              <li>
+
+                                <a href="{% url 'equip:add_direction' %}"  title="Ajouter nom d'une direction" class="addlink btn btn-primary p-1">
+                                    Add direction  <big>+</big>
+                                </a>
+                              </li>
+                       </ul>
+
+
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                     <th scope="col">Nom</th>
+
+
+                                    <th scope="col">Action</th>
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for list in list_direction %}
+                                        <tr>
+                                            <th scope="row">{{ list.id }}</th>
+                                               <td>{{ list.Nom }}</td>
+
+
+                                            <td><a class="text-dark btn btn-success p-2" href="{% url 'equip:update_direction' list.id %}" title="Modifier direction"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+
+
+                                        </tr>
+                                 {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+ {% include 'equipement/include_footer.html' %}
+
+
+    </div>
+
+
+{% endblock %}

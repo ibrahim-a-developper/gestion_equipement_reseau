@@ -1,0 +1,121 @@
+{% extends 'base.html'%}
+{% block content %}
+
+{% load crispy_forms_tags %}
+<div class="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!--page title-->
+            <div class="page-title mb-4 d-flex align-items-center">
+                <div class="mr-auto">
+                    <h4 class="weight500 d-inline-block pr-3 mr-3 border-right">Table Installation</h4>
+                    <nav aria-label="breadcrumb" class="d-inline-block ">
+                        <ol class="breadcrumb p-0">
+                            <li class="breadcrumb-item"><a href="{% url 'equip:home' %}">Accueil</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'equip:table_equipement' %}">TableEquipement</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">TableInstallation</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!--/page title-->
+
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header border-0">
+
+                            <div class="custom-title-wrap bar-primary">
+
+                                <div class="custom-title">Detail Installation</div>
+                                {% if messages %}
+                                {% for message in messages %}
+                                 <div class="alert alert-{{message.tags}}">
+                                    {{message}}
+                                 </div>
+                                {% endfor %}
+                            {% endif %}
+                            </div>
+                        </div>
+                        <div class="card-body- pt-3 pb-4">
+                            <div class="table-responsive">
+                                <table id="data_table" class="table table-bordered table-striped" cellspacing="0">
+
+                                    <thead>
+
+                                    <tr>
+
+                                        <th>Num serie </th>
+                                        <th>Nom  </th>
+                                        <th>Categorie </th>
+
+                                        <th>Direction</th>
+                                         <th>Date d'installation</th>
+
+                                        <th>Etat service</th>
+
+
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+
+                                    <tr>
+
+                                        <th>Num serie </th>
+                                        <th>Nom  </th>
+                                        <th>Categorie </th>
+
+                                        <th>Direction</th>
+                                        <th>Date d'installation</th>
+
+                                        <th>Etat service</th>
+
+
+                                        <th width="100px">Action</th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    {% for  list in list_installation  %}
+                                    <tr>
+
+                                        <td>{{ list.equipement_installe}}</td>
+                                        <td>{{ list.equipement_installe.nom}}  </td>
+                                        <td>{{ list.equipement_installe.category}} </td>
+
+                                         <td>{{ list.Nom_direction }}</td>
+                                        <td>{{ list.date_installe|date:'d M o' }}</td>
+
+
+                                        <td>
+                                           {{ list.service}}
+
+                                        </td>
+                                         <td>
+                                                 <a class="text-dark  btn btn-outline-info p-2 btn-md " href="{% url 'install:detail_installation' list.id %}" title="View equipement"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                              {% if request.user.is_staff %}
+                                                 <a class="text-dark btn btn-outline-warning p-2 btn-md " href="{% url 'install:update_service' list.id %}" title="Suivre etat service"><i class="fa fa-bandcamp" aria-hidden="true"></i></a>
+                                                {% endif %}
+                                               <a class="text-dark  btn btn-outline-success p-2 btn-md " href="{% url 'install:update_installation' list.id %}" title="Modifier installation"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
+                                         </td>
+                                    </tr>
+                                 {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+<!--    footer -->
+     {% include 'equipement/include_footer.html' %}
+
+
+    </div>
+
+{% endblock content %}

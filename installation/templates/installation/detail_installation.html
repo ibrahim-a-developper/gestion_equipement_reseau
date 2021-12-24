@@ -1,0 +1,129 @@
+
+
+
+
+{% extends 'base.html'%}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+
+
+    <div class="content-wrapper">
+
+        <div class="container-fluid">
+
+            <!--page title-->
+            <div class="page-title mb-4 d-flex align-items-center">
+                <div class="mr-auto">
+                    <h4 class="weight500 d-inline-block pr-3 mr-3 border-right">View Installation</h4>
+                    <nav aria-label="breadcrumb" class="d-inline-block ">
+                        <ol class="breadcrumb p-0">
+                            <li class="breadcrumb-item"><a href="{% url 'equip:home' %}">Accueil</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'equip:table_equipement' %}">TableEquipement</a></li>
+                             <li class="breadcrumb-item"><a href="{% url 'installation:table_installation' %}">TableInstallation</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">View {{detail_installation.equipement_installe.nom}}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!--/page title-->
+
+            <div class="row">
+                <div class="col-xl-9">
+                    <div class="card card-shadow mb-4">
+                        <div class="card-header border-0">
+                            <div class="custom-title-wrap bar-primary">
+                                <div class="custom-title">
+
+                                     <button class="btn  btn-success p-1 btn-md"></button>
+                                     Installation<br>
+                                    Etat service: {{detail_installation.service}}
+                                </div>
+
+
+
+                            </div>
+                               <div >
+
+
+                                </div>
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                  <ul>
+                                      <li> Ip: {{detail_installation.ip}} </li>
+                                      <li>Adesse mac: {{detail_installation.mac}}   </li>
+                                      <li>  Atribué au direction: {{detail_installation.Nom_direction}}</li>
+                                       <li>  Installer par: {{detail_installation.author}}</li>
+                                        <li>  Date d'installation: {{detail_installation.date_installe|date:'d M o'}}</li>
+
+                                  </ul>
+
+
+                                             <ul type="none" class="object-tools">
+                                              <li>
+
+
+                                                <a href="{% url 'installation:delete_installation' detail_installation.id %}"
+                                                  title="Desinstaller un equipement" class="addlink btn btn-danger p-2 mt-5">
+                                                   Desinstaller
+                                                </a>
+
+                                              </li>
+                                             </ul>
+
+
+
+
+                                    <!-- Modal -->
+
+                                </div>
+
+                                <div class="col-md-4 mb-6">
+                            <ul>
+                                 <li> Nom equipement: {{detail_installation.equipement_installe.nom}} </li>
+                                <li> Numero serie: {{detail_installation.equipement_installe}} </li>
+                                <li> Category: {{detail_installation.equipement_installe.category}} </li>
+                                <li> Ajouter par: {{detail_installation.equipement_installe.author}} </li>
+                                <li> Ajouter par: {{detail_installation.equipement_installe.date_ajoute|date:'d M o'}}</li>
+
+
+
+                            </ul>
+
+                                    <!-- Modal -->
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <!--footer-->
+
+
+
+        <!--/footer-->
+    </div>
+    <!--/main content wrapper-->
+
+
+
+{% endblock  %}
+
